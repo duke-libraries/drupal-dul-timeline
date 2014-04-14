@@ -130,9 +130,10 @@ function dul_timeline_timeline_page($url_alias) {
 	#		->condition('url_alias', $url_alias);		//
 	# $dbResult = $selectQuery->execute();
 	# $timeline = $dbResult->fetchObject();
-	
+
 
 	# STEP #2 -- LOAD your variables
+	// $myvarname = variable_get('namespace.myvarname');
 
 	# STEP #3 -- fetch data from Google
 	# contents of your current 'connections.php' go here
@@ -140,6 +141,10 @@ function dul_timeline_timeline_page($url_alias) {
 	# STAGE #4
 	# create output using straight HTML or
 	# render array elements
+
+	// use drupal_add_css() and drupal_add_js()
+
+	// For Debugging, use "dpm()" or "kpr()"
 
 	$page['bio'] = array(
 		'#theme' => 'bio',
@@ -149,4 +154,6 @@ function dul_timeline_timeline_page($url_alias) {
 		);
 
 	# create another entry for 'timeline-content'
+
+	return $page;
 }
