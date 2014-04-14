@@ -48,13 +48,12 @@ function dul_timeline_menu() {
 		# the machine_id assigned to each timeline record.
 		# Drupal will look for a function (in THIS file) named
 		# drupal_timeline_timeline_load($id).
-		'admin/config/timeline/edit/%dul_timeline_timeline' = array(
-			'page callback' => 'drupal_get_form'
-			'page callback' => 'dul_timeline_admin_edit',
+		'admin/config/timeline/edit/%dul_timeline_timeline' => array(
+			'page callback' => 'drupal_get_form',
 
 			# the "loader" function noted above will return an 
 			# array, object, string (your choice).
-			'page arguments' => array(4),
+			'page arguments' => array('dul_timeline_admin_edit', 4),
 
 			'file' => 'dul_timeline.admin.inc',
 			'access arguments' => array('administer site configuration'),

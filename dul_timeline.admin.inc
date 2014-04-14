@@ -78,7 +78,7 @@ function dul_timeline_timeline_form($form, &$form_state, $timeline) {
 		'#description' => t('0-index position in the Google Spreadsheet where this record resides'),
 		'#title' => t('Datasource Row'),
 		'#default_value' => $timeline->datasource_row,
-		'#required' = TRUE,
+		'#required' => TRUE,
 		);
 
 	$form['tid'] = array(
@@ -87,7 +87,7 @@ function dul_timeline_timeline_form($form, &$form_state, $timeline) {
 		);
 
 	$form['actions'] = array(
-		'#type' => 'actions';
+		'#type' => 'actions',
 		);
 	$form['actions']['submit'] = array(
 		'#type' => 'submit',
@@ -117,13 +117,13 @@ function dul_timeline_admin_settings($form, &$form_state) {
 	# we'll need a element 'master key'
 	$form['dul_masterkey'] = array(
 		'#type' => 'textfield',
-		'#default_value' => '';			// use "variable_get()" to fetch this value
+		'#default_value' => '',			// use "variable_get()" to fetch this value
 		'#required' => TRUE,
 		'#title' => 'DUL Master Key',
 		);
 
 	$form['actions'] = array(
-		'#type' => 'actions';
+		'#type' => 'actions',
 		);
 	$form['actions']['submit'] = array(
 		'#type' => 'submit',
