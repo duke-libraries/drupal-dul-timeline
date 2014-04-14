@@ -1,6 +1,10 @@
 drupal-dul-timeline
 ===================
 
+How to Clone:
+--------------
+git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline
+
 Goals for this module
 ---------------------
 * Provide a simple facility for Site Administrators to create Timeline pages without a lot of Drupal/PHP coding
