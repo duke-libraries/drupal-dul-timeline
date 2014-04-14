@@ -6,6 +6,40 @@
  */
 function dul_timeline_schema() {
 	return array(
+		'timeline' => array(
+			'description' => 'Table of timeline records',
+			'fields' => array(
+				'tid' => array(
+					'type' => 'serial',
+					'unsigned' => TRUE,
+					'not null' => TRUE,
+					),
+				'title' => array(
+					'type' => 'varchar',
+					'length' => 128,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				'datasource_row' => array(
+					'type' => 'int', 
+					'unsigned' => TRUE, 
+					'size' => 'small',
+					),
+				//'name' => array(
+				//	'type' => 'varchar',
+				//	'length' => 60,
+				//	'not null' => TRUE,
+				//	'default' => '',
+				//	),
+				'url_alias' => array(
+					'type' => 'varchar',
+					'length' => 128,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				),
+			'primary key' => array('tid'),
+			),
 	);
 }
 
@@ -19,7 +53,7 @@ function dul_timeline_install() {
 	// variable_set('myvarname', 'somevalue');
 	//  -- or --
 	// Using a "namespace" convention is preferred, like this:
-	// variable_set('dul_timeline.myvarname', 'somevalue');
+	// variable_set('dul_timeline.dul_masterkey', 'somevalue');
 }
 
 /**
@@ -28,5 +62,5 @@ function dul_timeline_install() {
  * Delete all previously defined settings variables
  */
 function dul_timeline_uninstall() {
-
+	// variable_del('dul_timeline.myvarname');
 }
