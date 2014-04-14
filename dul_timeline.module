@@ -11,32 +11,7 @@ function dul_timeline_menu() {
 	// The value for each key is an array that defines
 	// page callbacks
 	// @see hook_menu()
-	return array(
-
-		// this 'key' can be changed at any time.  Just be sure to 
-		// clear the menu cache when any part of this definition changes
-		'timeline' => array(
-			# the page callback is function, located in this file
-			# or another file (specified by the 'file' key)
-			# that Drupal will call to process the page request
-			'page callback' => 'dul_timeline_timeline_page',
-
-			# Consider this case: an end-user enters the following URL:
-			# http://mysite.com/timeline/<some_id>
-			# while <some_id> doesn't appear in the array key, it can still be 
-			# referenced as a page argument:
-			'page arguments' => array(1),		# where '1' is the position in the path pieces
-
-			# let everyone have access to this page
-			'access callback' => TRUE,
-
-			# define a standard title
-			'title' => 'Timeline',
-
-			# OR, you can have more flexibility by using a...
-			# 'title callback' => 'dul_timeline_timeline_title',
-			# 'title arguments' => array(1),
-		),
+	$items = array(
 
 		// you'll likely need an administrative form to 
 		// create Timeline entries for easy reference
@@ -65,6 +40,7 @@ function dul_timeline_menu() {
 			'page arguments' => array('dul_timeline_admin_settings'),
 			'access arguments' => array('administer site configuration'),
 			'file' => 'dul_timeline.admin.inc',
+			'type' => MENU_DEFAULT_LOCAL_TASK,	// causes Drupal to create a tab.
 		),
 
 		# this is a standard path that represents an edit request
@@ -85,6 +61,39 @@ function dul_timeline_menu() {
 			'title' => 'Edit Timeline Entry',
 		),
 	);
+
+	// We need to query the database to get the existing
+	// Timeline records, specifically to get the url_alias column
+	// @https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_select/7
+	$dbResult = db_select('timeline', 't')
+		->fields('t')
+		->execute();
+
+	foreach ($dbResult as $row) {
+		$key = sprintf("collections/%s", $row->url_alias);
+		$items[$key] = array(
+			'page callback' => 'dul_timeline_timeline_page',
+			'page arguments' => array(1),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+			);
+	}
+
+}
+
+/**
+ * Implements hook_theme
+ */
+function dul_timeline_theme() {
+	return array(
+		'bio' => array(
+			'template' => 'bio-content',	// the file on disk will be named 'bio-content.tpl.php'
+			'variables' => array('dulmaster_headshot' => NULL, 'dulmaster_name' => NULL, 'dulmaster_abstract' => NULL),
+			),
+
+		// DEFINE ENTRY for 'timeline-content'
+		
+	);
 }
 
 /**
@@ -99,4 +108,45 @@ function dul_timeline_timeline_load($id) {
 	} else {
 		// fetch record from database
 	}
+}
+
+/**
+ * Page callback for the 'collections' menu entry
+ */
+function dul_timeline_timeline_page($url_alias) {
+	# step one -- make sure the $catgory and $timeline are valid values.
+	# if not, redirect to the 'whoops' page (defined in dul_system.module)
+	# drupal_goto('whoops');
+
+	#-------------------
+
+	# PREAMBLE - load required files
+	# @https://api.drupal.org/api/drupal/includes%21common.inc/function/drupal_get_path/7
+	#--- require_once(drupal_get_path('module', 'dul_timeline')) . '/includes/connections.php';
+	
+	# STEP #1
+	# $selectQuery = db_select('timeline','t')
+	# 	->fields('t')
+	#		->condition('url_alias', $url_alias);		//
+	# $dbResult = $selectQuery->execute();
+	# $timeline = $dbResult->fetchObject();
+	
+
+	# STEP #2 -- LOAD your variables
+
+	# STEP #3 -- fetch data from Google
+	# contents of your current 'connections.php' go here
+
+	# STAGE #4
+	# create output using straight HTML or
+	# render array elements
+
+	$page['bio'] = array(
+		'#theme' => 'bio',
+		'#dulmaster_headshot' => '',
+		'#dulmaster_name' => '',
+		'#dulmaster_abstract' => '',
+		);
+
+	# create another entry for 'timeline-content'
 }

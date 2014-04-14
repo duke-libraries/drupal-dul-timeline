@@ -27,16 +27,14 @@ function dul_timeline_admin_overview() {
 	# STEP 2:
 	$header = array(
 		t('ID'),
-		t('Timeline Name'),
-		t('Machine Name'),
+		t('Timeline Title'),
 		t('Actions'),
 	);
 	$rows = array();
 	foreach ($dbResult as $o) {		// $o is my fancy notation for 'object'
 		$rows[] = array(
-			$o->id,
-			$o->timeline_name,		// or whatever name used to represent the timeline name column
-			$o->timeline_machine_id,
+			$o->tid,
+			$o->title,		// or whatever name used to represent the timeline name column
 			l(t('edit'), 'admin/config/timeline/edit/' . $o->id),
 			);
 	}
@@ -55,12 +53,93 @@ function dul_timeline_admin_overview() {
  * page callback for data entry form for timeline record
  */
 function dul_timeline_timeline_form($form, &$form_state, $timeline) {
+	$form['timeline_title'] = array(
+		'#type' => 'textfield',
+		'#description' => t('The title of this collections timeline'),
+		'#title' => t('Title'),
+		'#default_value' => $timeline->title,
+		'#required' => TRUE,
+		);
 
+	// 
+	#$form['dul_master_num'] = array(
+	#	);
+
+	## You will also need a textfield for the custom URL for this
+	$form['url_alias'] = array(
+		'#type' => 'textfield',
+		'#required' => TRUE,
+		'#title' => t('URL'),
+		'#default_value' => $timeline->url_alias,
+		);
+
+	$form['datasource_row'] = array(
+		'#type' => 'textfield',
+		'#description' => t('0-index position in the Google Spreadsheet where this record resides'),
+		'#title' => t('Datasource Row'),
+		'#default_value' => $timeline->datasource_row,
+		'#required' = TRUE,
+		);
+
+	$form['tid'] = array(
+		'#type' => 'hidden',
+		'#value' => $timeline->tid,
+		);
+
+	$form['actions'] = array(
+		'#type' => 'actions';
+		);
+	$form['actions']['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Submit',
+		// default name of the element is "op"
+		// @see https://api.drupal.org/api/drupal/developer!topics!forms_api_reference.html/7
+		);
 }
 
 /**
  * submit callback for timeline edit form
  */
 function dul_timeline_timeline_form_submit($form, &$form_state) {
+	// save changes to the database.
+	// db_merge() - handles both insert and update
+	// @see https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_merge/7
+}
 
+/**
+ * Setting administrative for Timeline
+ */
+function dul_timeline_admin_settings($form, &$form_state) {
+	# GET THE VARIABLE SETTINGs first
+	// $dul_masterkey = variable_get('dul_timeline.dul_masterkey');
+	// take that value and use it as as #default_value for the appropriate element below
+
+	# we'll need a element 'master key'
+	$form['dul_masterkey'] = array(
+		'#type' => 'textfield',
+		'#default_value' => '';			// use "variable_get()" to fetch this value
+		'#required' => TRUE,
+		'#title' => 'DUL Master Key',
+		);
+
+	$form['actions'] = array(
+		'#type' => 'actions';
+		);
+	$form['actions']['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Submit',
+		// default name of the element is "op"
+		// @see https://api.drupal.org/api/drupal/developer!topics!forms_api_reference.html/7
+		);
+
+	return $form;
+}
+
+function dul_timeline_admin_setting_submit($form, &$form_state) {
+	// variable_set('namespace.somevarname', 'some value');\
+	// one of the keys in the $form_state array is "values", which
+	// represents all of the form elements, as you named in the 'dul_timeline_admin_settings' callback
+	$dul_masterkey = $form_state['values']['dul_masterkey'];
+
+	// variable_set('dul_system.myfancyvariable', 'whatever')
 }
