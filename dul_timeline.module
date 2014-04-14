@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * Implements hook_menu
+ * @return array of menu mappings
+ */
+function dul_timeline_menu() {
+	// return an associative (hash) array where each key 
+	// represents a relative URL path to be entered by
+	// an end-user.
+	// The value for each key is an array that defines
+	// page callbacks
+	// @see hook_menu()
+	return array(
+
+		// this 'key' can be changed at any time.  Just be sure to 
+		// clear the menu cache when any part of this definition changes
+		'timeline' => array(
+			# the page callback is function, located in this file
+			# or another file (specified by the 'file' key)
+			# that Drupal will call to process the page request
+			'page callback' => 'dul_timeline_timeline_page',
+
+			# Consider this case: an end-user enters the following URL:
+			# http://mysite.com/timeline/<some_id>
+			# while <some_id> doesn't appear in the array key, it can still be 
+			# referenced as a page argument:
+			'page arguments' => array(1),		# where '1' is the position in the path pieces
+
+			# let everyone have access to this page
+			'access callback' => TRUE,
+
+			# define a standard title
+			'title' => 'Timeline',
+
+			# OR, you can have more flexibility by using a...
+			# 'title callback' => 'dul_timeline_timeline_title',
+			# 'title arguments' => array(1),
+		),
+
+		// you'll likely need an administrative form to 
+		// create Timeline entries for easy reference
+		// --
+		// This entry creates a "Collection Timelines" menu entry
+		// in the "Configuration" menu in the Admin Toolbar
+		'admin/config/timeline' => array(
+			'title' => 'Collection Timelines',
+			'page callback' => 'dul_timeline_admin_overview',
+
+			# these arguments are sent to Drupal's "user_access" hook 
+			# for verification
+			'access arguments' => array('administer site configuration'),
+
+			# I typically separate 'admin' pages into their own file
+			# End result: function dul_timeline_admin_overview() will
+			# reside in this file (located in our module directory)
+			'file' => 'dul_timeline.admin.inc',
+		),
+
+		// this entry defines a path to an admin form
+		// where default (variable) settings can be defined
+		'admin/config/timeline/settings' => array(
+			'title' => 'Timeline Management Settings',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('dul_timeline_admin_settings'),
+			'access arguments' => array('administer site configuration'),
+			'file' => 'dul_timeline.admin.inc',
+		),
+
+		# this is a standard path that represents an edit request
+		# I'm using a wildcard, %dul_timeline_timeline, to represent
+		# the machine_id assigned to each timeline record.
+		# Drupal will look for a function (in THIS file) named
+		# drupal_timeline_timeline_load($id).
+		'admin/config/timeline/edit/%dul_timeline_timeline' = array(
+			'page callback' => 'drupal_get_form'
+			'page callback' => 'dul_timeline_admin_edit',
+
+			# the "loader" function noted above will return an 
+			# array, object, string (your choice).
+			'page arguments' => array(4),
+
+			'file' => 'dul_timeline.admin.inc',
+			'access arguments' => array('administer site configuration'),
+			'title' => 'Edit Timeline Entry',
+		),
+	);
+}
+
+/**
+ * "Loader" function for timeline record
+ * when "%dul_timeline_timeline" is included in a key in 
+ * the hook_menu() implementation
+ * @see dul_timeline_menu()
+ */
+function dul_timeline_timeline_load($id) {
+	if (preg_match('/^new/i') == 1) {
+		// create new object (or array)
+	} else {
+		// fetch record from database
+	}
+}

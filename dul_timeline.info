@@ -1,0 +1,4 @@
+name = Collections Timeline
+description = Timeline Pages for Collections in Rubenstein
+package = Duke University Library UI
+core = 7.x

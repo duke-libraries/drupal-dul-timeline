@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_schema()
+ * With this hook implemented, Drupal will create the database table(s) needed
+ */
+function dul_timeline_schema() {
+	return array(
+	);
+}
+
+/**
+ * Implements hook_install()
+ *
+ * use this hook to define "settings" variables
+ */
+function dul_timeline_install() {
+	// example
+	// variable_set('myvarname', 'somevalue');
+	//  -- or --
+	// Using a "namespace" convention is preferred, like this:
+	// variable_set('dul_timeline.myvarname', 'somevalue');
+}
+
+/**
+ * Implements hook_uninstall()
+ *
+ * Delete all previously defined settings variables
+ */
+function dul_timeline_uninstall() {
+
+}
