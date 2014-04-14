@@ -6,6 +6,35 @@
  */
 function dul_timeline_schema() {
 	return array(
+		'timeline' => array(
+			'description' => 'Table of timeline records',
+			'fields' => array(
+				'tid' => array(
+					'type' => 'serial',
+					'unsigned' => TRUE,
+					'not null' => TRUE,
+					),
+				'title' => array(
+					'type' => 'varchar',
+					'length' => 60,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				'name' => array(
+					'type' => 'varchar',
+					'length' => 60,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				'url' => array(
+					'type' => 'varchar',
+					'length' => 128,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				),
+			'primary key' => array('tid'),
+			),
 	);
 }
 
