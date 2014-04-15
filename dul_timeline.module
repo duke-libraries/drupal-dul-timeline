@@ -113,7 +113,7 @@ function dul_timeline_timeline_load($id) {
  * Page callback for the 'collections' menu entry
  */
 function dul_timeline_timeline_page($url_alias) {
-	# step one -- make sure the $catgory and $timeline are valid values.
+	# STEP ONE -- make sure the $catgory and $timeline are valid values.
 	# if not, redirect to the 'whoops' page (defined in dul_system.module)
 	# drupal_goto('whoops');
 
