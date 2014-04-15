@@ -3,7 +3,7 @@ drupal-dul-timeline
 
 How to Clone:
 --------------
-git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline
+`git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline`
 
 Goals for this module
 ---------------------
@@ -23,6 +23,19 @@ Drupal Hooks to be Implemented
 * hook_schema
 * hook_install
 * hook_uninstall
+
+Hooks
+-----
+
+### hook_install
+Use this hook to set up variable settings needed for the module, such as the master key for the Google Spreadsheet used to provide the data.
+
+Also use this hook to add data rows to the `timeline` table (see below)
+
+Database Tables
+---------------
+
+### timeline
 
 Other Functions Needed -- Maybe
 -------------------------------
