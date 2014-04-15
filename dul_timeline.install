@@ -25,12 +25,6 @@ function dul_timeline_schema() {
 					'unsigned' => TRUE, 
 					'size' => 'small',
 					),
-				//'name' => array(
-				//	'type' => 'varchar',
-				//	'length' => 60,
-				//	'not null' => TRUE,
-				//	'default' => '',
-				//	),
 				'url_alias' => array(
 					'type' => 'varchar',
 					'length' => 128,
@@ -54,6 +48,26 @@ function dul_timeline_install() {
 	//  -- or --
 	// Using a "namespace" convention is preferred, like this:
 	// variable_set('dul_timeline.dul_masterkey', 'somevalue');
+
+
+	// DATA LOADING:
+	// Also -- use this hook to add initial data to the database
+	// For instance, if you have some Timeline records that need
+	// to be present, add them here, like so:
+
+	// THIS is the equivalent of a multi-row insert
+	// ------------------------------------------------------
+	#$values = array(
+	#	array('tid' => '', 'title' => 'Timeline Entry #1', 'datasource_row' => 'row number', 'url_alias' => 'dukelib/timeline'),
+	#	// ADD MORE entries below
+	#	);
+
+	#$query = db_insert('timeline')->fields(array('tid', 'title', 'datasource_row', 'url_alias'));
+	#foreach ($values as $record) {
+	#	$query->values($record);
+	#}
+	// END CODE SNIPPET
+
 }
 
 /**
