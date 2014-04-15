@@ -36,7 +36,39 @@ Database Tables
 ---------------
 
 ### timeline
+```This table stores a mapping of a Timeline 'page' to the specific row in a designated Google Spreadsheet.```
 
+#### Schema (Drupal-format)
+```
+'timeline' => array(
+	'description' => 'Table of timeline records',
+	'fields' => array(
+		'tid' => array(
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+			),
+		'title' => array(
+			'type' => 'varchar',
+			'length' => 128,
+			'not null' => TRUE,
+			'default' => '',
+			),
+		'datasource_row' => array(
+			'type' => 'int', 
+			'unsigned' => TRUE, 
+			'size' => 'small',
+			),
+		'url_alias' => array(
+			'type' => 'varchar',
+			'length' => 128,
+			'not null' => TRUE,
+			'default' => '',
+			),
+		),
+	'primary key' => array('tid'),
+	),
+```
 Other Functions Needed -- Maybe
 -------------------------------
 * Loader function to fetch individual Timeline record
