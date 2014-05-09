@@ -3,7 +3,9 @@ drupal-dul-timeline
 
 How to Clone:
 --------------
-```git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline```
+```git
+git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline
+```
 
 Installing Module with Drush
 ```
