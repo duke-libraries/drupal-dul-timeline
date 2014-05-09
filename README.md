@@ -3,7 +3,12 @@ drupal-dul-timeline
 
 How to Clone:
 --------------
-`git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline`
+```git clone git@github.com:duke-libraries/drupal-dul-timeline.git dul_timeline```
+
+Installing Module with Drush
+```
+drush en -y dul_timeline
+```
 
 Goals for this module
 ---------------------
