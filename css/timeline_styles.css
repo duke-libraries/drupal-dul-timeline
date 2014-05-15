@@ -1,0 +1,346 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #222;
+}
+
+#page-title {
+	display:none;
+}
+
+.wrapper {
+	margin-top: 30px;
+	padding: 30px;
+	width: 100%;
+	max-width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #eee;
+	overflow: hidden;
+}
+
+.col1 {
+	float: left;
+	/*width: 640px;*/
+	width: 66%;
+}
+
+.col2 {
+	float: left;
+	/*width: 280px;*/
+	width: 29%;
+	margin-top: 20px;
+	/*margin-left: 40px;*/
+	margin-left: 4%;
+}
+
+
+
+.iframe-timeline {
+background-color: #ffffff;
+margin-top: 20px;
+margin-bottom: 20px;
+border: 1px solid #cccccc;
+padding-top: 20px;
+padding-bottom: 20px;
+clear: both;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+-moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+h1.splashTitle {
+color: #003366;
+font-size: 36px;
+}
+
+.abstractBio {
+overflow: hidden;
+}
+
+.personAbout p {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+line-height: 20px;
+color: #333;
+}
+
+h2 {
+	color: #003366;
+	font-family: Interstate, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+.mainLinks {
+	font-size: 12px;
+	margin: 0 0 0 0;
+	padding: 10px 0 20px 0;
+}
+
+
+
+/* timeline item display */
+
+.item-wrapper {
+	width: 640px;
+	clear: left;
+	padding-top: 5px;
+}
+
+.summary {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #eaeaea;
+	font-size: 13px;
+	font-weight: bold;
+	border-bottom: 2px dotted #aaa;
+	overflow: hidden;
+	clear: left;
+}
+
+.dates {
+	float: left;
+	color: #003366;
+	font-size: 16px;
+	font-style: bold;
+	width: /*160*/ 200px;
+	margin-right: 20px;
+}
+
+.headline {
+	float: left;
+	font-size: 13px;
+	font-style: bold;
+	width: 420px;
+}
+
+.thumbnail {
+	width: /*160*/ 200px;
+	margin-right: 20px;
+	float: left;
+}
+
+.thumbnail img {
+	width: /*150*/ 180px;
+	border: 1px solid #ccc;
+	padding: 3px;
+	-moz-box-shadow: 2px 2px 2px 0px #ccc;
+	-webkit-box-shadow: 2px 2px 2px 0px #ccc;
+	box-shadow: 2px 2px 2px 0px #ccc;
+	margin-bottom: 10px;
+}
+
+.clipwrapper {
+	width: 35px;
+	height: 35px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+	
+	border: 1px solid #ccc;
+	padding: 3px;
+	
+	-moz-box-shadow: 2px 2px 2px 0px #ccc;
+	-webkit-box-shadow: 2px 2px 2px 0px #ccc;
+	box-shadow: 2px 2px 2px 0px #ccc;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.clip {
+	clip: rect(auto);
+	position: absolute;
+	left: -50%;
+	top: -50%;
+}
+
+.small-thumbnail img {
+	
+}
+
+.description {
+	float: left;
+	width: 420px;
+}
+
+.description p {
+	font-size: 12px;
+	line-height: 1.4em;
+	margin:0;
+	padding:0;
+	
+}
+
+.credit {
+	color: #999;
+	font-size: 12px;
+}
+
+
+/* Color Box */
+
+#cboxTitle {
+background: none repeat scroll 0 0 #444444;
+bottom: 20px;
+color: white;
+font-weight: bold;
+opacity: 0.8;
+padding: 3px;
+position: absolute;
+text-align: center;
+width: 100%;
+}
+
+#cboxCurrent {
+left: 130px;
+}
+
+#cboxWrapper {
+font-size: 12px;
+}
+
+
+
+/* Sidebar Items */
+
+#sidebar h3 {
+font-family: Interstate, Verdana, Arial, Helvetica, sans-serif;
+font-size: 13px;
+}
+
+#sidebar ul {
+	margin:0;
+	padding:0;
+}
+
+#sidebar ul li {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+}
+
+
+
+/* Extra Styles */
+
+div.abstractBio {
+
+
+   background: url("http://library.duke.edu/imgs/common/effects/gradient_tan_150.jpg") repeat-x scroll left top #e8e6e0;
+   border-bottom: 1px dotted #C5C1AF;
+   border-top: 1px dotted #C5C1AF;
+   padding: 10px 20px;
+
+}
+
+a.linkFindingAid { padding-right: 20px !important;}
+#personPortrait { float: right; margin-left: 20px;}
+img.portrait { width: 180px; }
+p.personAbout {     color: #333333;
+   font-family: "Georgia",Times New Roman,Times,serif;
+   font-size: 15px;
+   line-height: 20px;}
+p.personAbout:first-letter {
+color: #777;
+font-family: Georgia,serif;
+float: left;
+font-size: 55px;
+line-height: 45px;
+margin-bottom: -10px;
+margin-right: 4px;
+position: relative;
+}
+
+div.bioSource {  font-style: italic; font-size: 11px;}
+
+  ul.mainLinks li { float: left; margin-left: 0; margin-right: 20px; list-style: none; font-weight: bold; }
+ul.mainLinks a { padding-left: 20px; background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_grey.png") no-repeat top left;}
+ ul.mainLinks a:hover { background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_darkblue.png") no-repeat top left;}
+
+
+table.biogHist { vertical-align: top; text-align: left;}
+
+div.summaryRow { margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px; background: #eaeaea; font-size: 13px; font-weight: bold; border-bottom: 2px dotted #aaa;}
+div.summaryRow div {  }
+div.columnDate time { font-size: 16px; color: #003366;  }
+div.columnImage { padding-left: 0;}
+div.columnEvent { }
+
+
+table.biogHist td { vertical-align: top;}
+table.biogHist th { text-align: left;}
+
+table.biogHist tr.summaryRow { margin-top: 30px;}
+table.biogHist tr.summaryRow td {  background: #eaeaea; font-size: 13px; font-weight: bold; border-bottom: 2px dotted #aaa;}
+table.biogHist td.columnDate time { font-size: 16px; color: #003366;}
+table.biogHist td.columnImage { padding-left: 0;}
+table.biogHist td.columnEvent { padding-left: 20px;}
+
+
+div.secondaryImages .clipwrapper { height:41px; float: left; position: relative; width:41px; overflow: hidden; margin: 1px; }
+
+div.secondaryImages .clip {
+clip:rect(auto); position:absolute;
+left: -50%; top: -50%;
+}
+div.eventSource { clear: both; float: right; text-align: right; font-size: 11px;}
+ul.eventSourceCollections { display: none; text-align: left;}
+#sidebar {}
+#sidebar ul li { font-size: 11.5px; list-style: none; margin-left: 0; margin-bottom: 1em;}
+#sidebar ul a { font-weight: bold;}
+span.collectionDescription { display: block; margin-top: 10px; color: #777;}
+
+.highlighted { background-color: #ffffaa !important; }
+
+.subtleBorder { border: 1px solid #ccc; padding: 3px; }
+.smallShadow { 
+-moz-box-shadow: 2px 2px 2px 0px #ccc; -webkit-box-shadow: 2px 2px 2px 0px #ccc;
+box-shadow: 2px 2px 2px 0px #ccc; }
+
+#timeline-embed { background: white;}
+
+
+
+/* ------------------------- */
+/* Verite Timeline Overrides */
+/* ------------------------- */
+
+.vmm-timeline a { color: #0736A4 !important; }
+
+div.layout-text-media div.text div.container { display: block !important; max-height: 390px !important; overflow: auto !important;}
+
+.vmm-timeline .navigation .timenav-background .timenav-line { background-color: #0736A4 !important;}
+.vmm-timeline .navigation .timenav .content .marker.active .flag .flag-content h3 {
+   color: #0736A4 !important;
+}
+.media-wrapper { margin-left: 10px !important;}
+
+.slider .nav-next .date, .slider .nav-next .title {
+    margin-left: -10px !important;
+}
+
+a.timelineMoreLink {}
+a.timelineMoreLink:hover { cursor: pointer;}
+
+
+
+/* --------------------------- */
+/* Colorbox lightbox overrides */
+/* --------------------------- */
+
+#cboxTitle {
+   background: none repeat scroll 0 0 #444444;
+   bottom: 20px;
+   color: white;
+   font-weight: bold;
+   opacity: 0.8;
+   padding: 3px;
+   position: absolute;
+   text-align: center;
+   width: 100%;
+}
+#cboxCurrent { left: 130px; }
+

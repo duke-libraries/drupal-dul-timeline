@@ -9,23 +9,69 @@ function dul_timeline_schema() {
 		'timeline' => array(
 			'description' => 'Table of timeline records',
 			'fields' => array(
+				
 				'tid' => array(
 					'type' => 'serial',
 					'unsigned' => TRUE,
 					'not null' => TRUE,
 					),
-				'title' => array(
+				
+				'timeline_name' => array(
 					'type' => 'varchar',
 					'length' => 128,
 					'not null' => TRUE,
 					'default' => '',
 					),
-				'datasource_row' => array(
+				
+				'dulmaster_key' => array(
+					'type' => 'varchar', 
+					'length' => 128,
+					'not null' => TRUE, 
+					'default' => '',
+					),
+				
+				'dulmaster_num' => array(
 					'type' => 'int', 
 					'unsigned' => TRUE, 
 					'size' => 'small',
 					),
-				'url_alias' => array(
+					
+				'timeline_od' => array(
+					'type' => 'varchar', 
+					'length' => 6,
+					'not null' => TRUE, 
+					'default' => '',
+					),
+					
+				'collections_od' => array(
+					'type' => 'varchar', 
+					'length' => 6,
+					'not null' => TRUE, 
+					'default' => '',
+					),
+					
+				'people_od' => array(
+					'type' => 'varchar', 
+					'length' => 6,
+					'not null' => TRUE, 
+					'default' => '',
+					),
+					
+				'corporate_od' => array(
+					'type' => 'varchar', 
+					'length' => 6,
+					'not null' => TRUE, 
+					'default' => '',
+					),
+				
+				'url_type' =>array(
+					'type' => 'varchar',
+					'length' => 128,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				
+				'url_slug' => array(
 					'type' => 'varchar',
 					'length' => 128,
 					'not null' => TRUE,
@@ -48,7 +94,9 @@ function dul_timeline_install() {
 	//  -- or --
 	// Using a "namespace" convention is preferred, like this:
 	// variable_set('dul_timeline.dul_masterkey', 'somevalue');
-
+	
+	variable_set('dul_timeline.dul_masterkey', '0Ah7VCreXiBHudFpxMGY0M0FQY1daTFVKbXNSV2ItTlE');
+	
 
 	// DATA LOADING:
 	// Also -- use this hook to add initial data to the database
@@ -67,6 +115,7 @@ function dul_timeline_install() {
 	#	$query->values($record);
 	#}
 	// END CODE SNIPPET
+	
 
 }
 
@@ -77,4 +126,11 @@ function dul_timeline_install() {
  */
 function dul_timeline_uninstall() {
 	// variable_del('dul_timeline.myvarname');
+	variable_del('dul_timeline.dul_masterkey');
+	
+	// Inform the user of the removal.
+	$t = get_t();
+	drupal_set_message($t('DUL Timelines variables removed.'));
+	
 }
+

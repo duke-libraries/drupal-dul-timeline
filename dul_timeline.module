@@ -5,154 +5,226 @@
  * @return array of menu mappings
  */
 function dul_timeline_menu() {
-	// return an associative (hash) array where each key 
-	// represents a relative URL path to be entered by
-	// an end-user.
-	// The value for each key is an array that defines
-	// page callbacks
-	// @see hook_menu()
+
 	$items = array(
 
-		// you'll likely need an administrative form to 
-		// create Timeline entries for easy reference
-		// --
-		// This entry creates a "Collection Timelines" menu entry
-		// in the "Configuration" menu in the Admin Toolbar
 		'admin/config/timeline' => array(
 			'title' => 'Collection Timelines',
 			'page callback' => 'dul_timeline_admin_overview',
 
-			# these arguments are sent to Drupal's "user_access" hook 
-			# for verification
 			'access arguments' => array('administer site configuration'),
 
-			# I typically separate 'admin' pages into their own file
-			# End result: function dul_timeline_admin_overview() will
-			# reside in this file (located in our module directory)
 			'file' => 'dul_timeline.admin.inc',
 		),
+		
+		'admin/config/timeline/new' => array (
+		
+			'type' => MENU_LOCAL_ACTION,
+			'title' => "New Timeline", 
+			'access arguments' => array('administer site configuration'), 
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('dul_timeline_timeline_admin_form', "new"),
+			'file' => 'dul_timeline.admin.inc',
+		
+		),
 
-		// this entry defines a path to an admin form
-		// where default (variable) settings can be defined
 		'admin/config/timeline/settings' => array(
 			'title' => 'Timeline Management Settings',
 			'page callback' => 'drupal_get_form',
-			'page arguments' => array('dul_timeline_admin_settings'),
+			'page arguments' => array('dul_timeline_timeline_admin_settings'),
 			'access arguments' => array('administer site configuration'),
 			'file' => 'dul_timeline.admin.inc',
-			'type' => MENU_DEFAULT_LOCAL_TASK,	// causes Drupal to create a tab.
+			'type' => MENU_DEFAULT_LOCAL_TASK,
 		),
 
-		# this is a standard path that represents an edit request
-		# I'm using a wildcard, %dul_timeline_timeline, to represent
-		# the machine_id assigned to each timeline record.
-		# Drupal will look for a function (in THIS file) named
-		# drupal_timeline_timeline_load($id).
-		'admin/config/timeline/edit/%dul_timeline_timeline' => array(
+		
+		'admin/config/timeline/edit/%dul_timeline' => array(
 			'page callback' => 'drupal_get_form',
 
 			# the "loader" function noted above will return an 
 			# array, object, string (your choice).
-			'page arguments' => array('dul_timeline_admin_edit', 4),
+			'page arguments' => array('dul_timeline_timeline_admin_form', 4),
 
 			'file' => 'dul_timeline.admin.inc',
 			'access arguments' => array('administer site configuration'),
 			'title' => 'Edit Timeline Entry',
 		),
 	);
+	
 
-	// We need to query the database to get the existing
-	// Timeline records, specifically to get the url_alias column
-	// @https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_select/7
 	$dbResult = db_select('timeline', 't')
 		->fields('t')
 		->execute();
 
 	foreach ($dbResult as $row) {
-		$key = sprintf("collections/%s", $row->url_alias);
-		$items[$key] = array(
+		
+		$key = sprintf("collections/%s/%s", $row->url_type, $row->url_slug);
+		
+		$items['collections'] = array(
 			'page callback' => 'dul_timeline_timeline_page',
-			'page arguments' => array(1),
 			'access callback' => TRUE,
 			'type' => MENU_CALLBACK,
 			);
 	}
+	
+	return $items;
 
 }
+
+
+function dul_timeline_load($tid) {
+
+	$result = db_query('SELECT n.* FROM {timeline} n WHERE n.tid = :tid', array(':tid' => $tid));
+	// select from timeline -> record based on ID
+
+	$record = $result->fetchObject(); 
+
+	return $record;
+
+}
+
 
 /**
  * Implements hook_theme
  */
+ 
 function dul_timeline_theme() {
+	
 	return array(
-		'bio' => array(
-			'template' => 'bio-content',	// the file on disk will be named 'bio-content.tpl.php'
-			'variables' => array('dulmaster_headshot' => NULL, 'dulmaster_name' => NULL, 'dulmaster_abstract' => NULL),
+		'the_timeline' => array(
+			'template' => 'timeline',
+			'variables' => array(
+				'dulmaster_headshot' => NULL, 
+				'dulmaster_name' => NULL, 
+				'dulmaster_abstract' => NULL,
+				'timeline_key' => NULL,
+				'data_timeline' => NULL,
+				'data_associatedcollections' => NULL,
+				'data_people' => NULL,
+				'data_corporatebodies' => NULL,
+				),
 			),
-
-		// DEFINE ENTRY for 'timeline-content'
-		
-	);
+		);
+	
 }
 
-/**
- * "Loader" function for timeline record
- * when "%dul_timeline_timeline" is included in a key in 
- * the hook_menu() implementation
- * @see dul_timeline_menu()
- */
-function dul_timeline_timeline_load($id) {
-	if (preg_match('/^new/i') == 1) {
+
+function dul_timeline_timeline_load($tid) {
+	
+	if (preg_match('/^new/i', 1)) {
 		// create new object (or array)
 	} else {
 		// fetch record from database
 	}
 }
 
+
 /**
  * Page callback for the 'collections' menu entry
  */
-function dul_timeline_timeline_page($url_alias) {
-	# STEP ONE -- make sure the $catgory and $timeline are valid values.
-	# if not, redirect to the 'whoops' page (defined in dul_system.module)
-	# drupal_goto('whoops');
-
-	#-------------------
-
-	# PREAMBLE - load required files
-	# @https://api.drupal.org/api/drupal/includes%21common.inc/function/drupal_get_path/7
-	#--- require_once(drupal_get_path('module', 'dul_timeline')) . '/includes/connections.php';
+function dul_timeline_timeline_page($url_type, $url_slug) {
 	
-	# STEP #1
-	# $selectQuery = db_select('timeline','t')
-	# 	->fields('t')
-	#		->condition('url_alias', $url_alias);		//
-	# $dbResult = $selectQuery->execute();
-	# $timeline = $dbResult->fetchObject();
+	$page = array();
+	
+	// 
+	$myResult = db_query('SELECT * FROM {timeline} WHERE url_type = :url_type AND url_slug = :url_slug', array(':url_type' => $url_type, ':url_slug' => $url_slug));
+	
+	//
+	$myRecord = $myResult->fetchObject();
+	
+	$dulmaster_key = $myRecord->dulmaster_key;
+	$dulmaster_num = $myRecord->dulmaster_num;
+	$timeline_od = $myRecord->timeline_od;
+	$collections_od = $myRecord->collections_od;
+	$people_od = $myRecord->people_od;
+	$corporate_od = $myRecord->corporate_od;
+	
+	// redirect to 404
+	if($myRecord===FALSE) {
+		
+		drupal_goto('whoops');
+		return;
+	}
 
 
-	# STEP #2 -- LOAD your variables
-	// $myvarname = variable_get('namespace.myvarname');
+	// CONNECTIONS //
+	
+	// set timeout length
+	$ctx = stream_context_create(array( 
+		'http' => array( 
+			'timeout' => 5 
+			) 
+		) 
+	); 
 
-	# STEP #3 -- fetch data from Google
-	# contents of your current 'connections.php' go here
+	// set timeout fallback
+	
+	
+	// Pull in Master Google Spreadsheet as JSON
+	$url_dulmaster = "http://spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
+	$json_dulmaster = file_get_contents($url_dulmaster, 0, $ctx);
+	$data_dulmaster = json_decode($json_dulmaster, TRUE);
 
-	# STAGE #4
-	# create output using straight HTML or
-	# render array elements
+	// dpm($url_dulmaster);
+	
+	// make variables for items in master sheet
 
-	// use drupal_add_css() and drupal_add_js()
+	$dulmaster_sheetkey = $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$spreadsheetkey']['$t'];
+	$dulmaster_name = $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$entityname']['$t'];
+	$dulmaster_headshot = 'http://library.duke.edu/digitalcollections/media/jpg/' . $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$slug']['$t'] . '/med/' . $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$portraitimage']['$t'];
+	$dulmaster_abstract = $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$abstract']['$t'];
+	
 
-	// For Debugging, use "dpm()" or "kpr()"
+	// Pull in other Google Spreadsheets as JSON
 
-	$page['bio'] = array(
-		'#theme' => 'bio',
-		'#dulmaster_headshot' => '',
-		'#dulmaster_name' => '',
-		'#dulmaster_abstract' => '',
+	$timeline_key = $dulmaster_sheetkey;
+	
+	$url_timeline = "http://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $timeline_od . "/public/values?alt=json&amp;callback=displayContent";
+	$json_timeline = file_get_contents($url_timeline, 0, $ctx);
+	$data_timeline = json_decode($json_timeline, TRUE);
+
+	$url_associatedcollections = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $collections_od . "/public/values?alt=json&amp;callback=displayContent";
+	$json_associatedcollections = file_get_contents($url_associatedcollections, 0, $ctx);
+	$data_associatedcollections = json_decode($json_associatedcollections, TRUE);
+
+	$url_people = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $people_od . "/public/values?alt=json&amp;callback=displayContent";
+	$json_people = file_get_contents($url_people, 0, $ctx);
+	$data_people = json_decode($json_people, TRUE);
+
+	$url_corporatebodies = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $corporate_od . "/public/values?alt=json&amp;callback=displayContent";
+	$json_corporatebodies = file_get_contents($url_corporatebodies, 0, $ctx);
+	$data_corporatebodies = json_decode($json_corporatebodies, TRUE);
+	
+
+	drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', 'external');
+	drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js', 'external');
+	drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css', array('type' => 'external'));
+	drupal_add_js('http://library.duke.edu/digitalcollections/media/app/js/colorbox-1.3.19/jquery.colorbox-min.js', 'external');
+	drupal_add_css('http://library.duke.edu/digitalcollections/media/app/js/colorbox-1.3.19/colorbox.css', array('type' => 'external'));
+	drupal_add_css('http://library.duke.edu/digitalcollections/media/app/css/findingaids-eac.css', array('type' => 'external'));
+	drupal_add_css('http://library.duke.edu/digitalcollections/media/app/css/veriteco-timeline/timeline.css', array('type' => 'external'));
+	drupal_add_css('/drupal/' . drupal_get_path('module', 'dul_timeline') . '/css/timeline_styles.css' , array('preprocess' => FALSE));
+	drupal_add_js('/drupal/' . drupal_get_path('module', 'dul_timeline') . '/js/settings.js', array('preprocess' => FALSE));
+	
+	
+	drupal_set_title($dulmaster_name);
+
+	$page['timeline_content'] = array (
+		'#theme' => 'the_timeline',
+		'#dulmaster_headshot' => $dulmaster_headshot,
+		'#dulmaster_name' => $dulmaster_name,
+		'#dulmaster_abstract' => $dulmaster_abstract,
+		'#timeline_key' => $timeline_key,
+		'#data_timeline' => $data_timeline,
+		'#data_associatedcollections' => $data_associatedcollections,
+		'#data_people' => $data_people,
+		'#data_corporatebodies' => $data_corporatebodies,
 		);
-
-	# create another entry for 'timeline-content'
+	
 
 	return $page;
+
 }
+
+
+
