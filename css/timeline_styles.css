@@ -1,36 +1,32 @@
-body {
-	font-family: Arial, Helvetica, sans-serif;
-	color: #222;
-}
 
 #page-title {
 	display:none;
 }
 
-.wrapper {
-	margin-top: 30px;
-	padding: 30px;
+.timeline-wrapper {
 	width: 100%;
-	max-width: 960px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid #eee;
 	overflow: hidden;
+	background: #fff;
 }
 
 .col1 {
 	float: left;
 	/*width: 640px;*/
 	width: 66%;
+	min-width: 320px;
 }
 
 .col2 {
 	float: left;
-	/*width: 280px;*/
 	width: 29%;
 	margin-top: 20px;
-	/*margin-left: 40px;*/
-	margin-left: 4%;
+	margin-left: 5%;
+}
+
+.grid-4 {
+	margin-top: 20px;
 }
 
 
@@ -54,6 +50,10 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
 h1.splashTitle {
 color: #003366;
 font-size: 36px;
+font-family: Garamond,serif;
+font-weight: normal;
+line-height: 1.04em;
+margin-top: 0.3em;
 }
 
 .abstractBio {
@@ -67,10 +67,13 @@ line-height: 20px;
 color: #333;
 }
 
-h2 {
+h2.bioTitle {
 	color: #003366;
 	font-family: Interstate, Verdana, Arial, Helvetica, sans-serif;
 	font-size: 20px;
+	padding-bottom: 4px;
+	font-weight: normal;
+	margin-top: 1em;
 }
 
 .mainLinks {
@@ -80,11 +83,10 @@ h2 {
 }
 
 
-
 /* timeline item display */
 
 .item-wrapper {
-	width: 640px;
+	width: 100%;
 	clear: left;
 	padding-top: 5px;
 }
@@ -107,25 +109,29 @@ h2 {
 	color: #003366;
 	font-size: 16px;
 	font-style: bold;
-	width: /*160*/ 200px;
-	margin-right: 20px;
+	width: 31%;
 }
 
 .headline {
-	float: left;
 	font-size: 13px;
 	font-style: bold;
-	width: 420px;
+	margin-left: 35%;
 }
 
-.thumbnail {
-	width: /*160*/ 200px;
-	margin-right: 20px;
+.timeline-thumbnail {
+	width: 31%;
 	float: left;
 }
 
-.thumbnail img {
-	width: /*150*/ 180px;
+.dates-spacer,
+.timeline-thumbnail-spacer {
+	width: 4%;
+	min-width: 10px;
+	float: left;
+}
+
+.timeline-thumbnail img {
+	width: 96%;
 	border: 1px solid #ccc;
 	padding: 3px;
 	-moz-box-shadow: 2px 2px 2px 0px #ccc;
@@ -135,8 +141,9 @@ h2 {
 }
 
 .clipwrapper {
-	width: 35px;
-	height: 35px;
+	width: 5.5%;
+	min-height: 35px;
+	
 	float: left;
 	overflow: hidden;
 	position: relative;
@@ -147,8 +154,8 @@ h2 {
 	-moz-box-shadow: 2px 2px 2px 0px #ccc;
 	-webkit-box-shadow: 2px 2px 2px 0px #ccc;
 	box-shadow: 2px 2px 2px 0px #ccc;
-	margin-right: 5px;
-	margin-bottom: 5px;
+	margin-right: 1.5%;
+	margin-bottom: 1.5%;
 }
 
 .clip {
@@ -163,8 +170,9 @@ h2 {
 }
 
 .description {
-	float: left;
-	width: 420px;
+	/*float: left;*/
+	margin-left: 35%;
+	
 }
 
 .description p {
@@ -237,8 +245,17 @@ div.abstractBio {
 }
 
 a.linkFindingAid { padding-right: 20px !important;}
-#personPortrait { float: right; margin-left: 20px;}
-img.portrait { width: 180px; }
+
+#personPortrait { 
+float: right; 
+margin-left: 20px;
+max-width: 20%;
+}
+
+img.portrait { 
+width: 100%; 
+}
+
 p.personAbout {     color: #333333;
    font-family: "Georgia",Times New Roman,Times,serif;
    font-size: 15px;
@@ -256,9 +273,9 @@ position: relative;
 
 div.bioSource {  font-style: italic; font-size: 11px;}
 
-  ul.mainLinks li { float: left; margin-left: 0; margin-right: 20px; list-style: none; font-weight: bold; }
+ul.mainLinks li { float: left; margin-left: 0; margin-right: 4%; list-style: none; font-weight: bold; }
 ul.mainLinks a { padding-left: 20px; background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_grey.png") no-repeat top left;}
- ul.mainLinks a:hover { background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_darkblue.png") no-repeat top left;}
+ul.mainLinks a:hover { background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_darkblue.png") no-repeat top left; color: #0736A4;}
 
 
 table.biogHist { vertical-align: top; text-align: left;}

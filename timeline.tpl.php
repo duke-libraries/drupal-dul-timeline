@@ -3,6 +3,7 @@ $thumbCount = 0;
 $cbCount = 0;
 ?>
 
+<div class="timeline-wrapper">
 
 <!-- Bio Text --->
 	
@@ -51,7 +52,7 @@ $cbCount = 0;
 	
 	<div class="iframe-timeline" id="timeline-embed">
 	
-		<?php echo '<iframe src="http://embed.verite.co/timeline/?source=' . $timeline_key . '&amp;font=Georgia-Helvetica&amp;maptype=toner&amp;lang=en&amp;height=550" width="100%" height="550" frameborder="0"></iframe>'; ?>
+		<?php echo '<iframe src="http://embed.verite.co/timeline/?source=' . $timeline_key . '&amp;font=Georgia-Helvetica&amp;maptype=toner&amp;lang=en&amp;height=450" width="100%" height="450" frameborder="0"></iframe>'; ?>
 	
 	</div>
 	
@@ -60,9 +61,9 @@ $cbCount = 0;
 
 	<!-- Entries: Column 1 -->
 	
-	<div class="col1">
+	<div class="grid-8 alpha">
 
-		<h2 id="biography">Biographical History</h2>
+		<h2 id="biography" class="bioTitle">Biographical History</h2>
 
 		<?php
 
@@ -132,7 +133,7 @@ $cbCount = 0;
 						
 						if ($item['gsx$mediathumbnail']['$t'] != "") {
 							
-							echo '<div class="thumbnail">';
+							echo '<div class="timeline-thumbnail">';
 			
 								echo '<a class="colorbox cboxElement" data-group="colorboxgroup' . $cbCount . '" title="' . $item['gsx$mediacaption']['$t'] . '" href="' . $item['gsx$media']['$t'] . '">';
 					
@@ -147,7 +148,7 @@ $cbCount = 0;
 							
 							else {
 								
-								echo '<div class="thumbnail">&nbsp;</div>';
+								echo '<div class="timeline-thumbnail">&nbsp;</div>';
 								
 							}
 							
@@ -201,7 +202,7 @@ $cbCount = 0;
 	
 	<!-- RELATIONS: Column 2 -->
 	
-	<div class="col2" id="sidebar">
+	<div class="grid-4 omega" id="sidebar">
 		
 		<div id="accordion" style="max-height: 600px;">
 			
@@ -303,3 +304,5 @@ $cbCount = 0;
 		</div>
 		
 	</div>
+	
+</div>
