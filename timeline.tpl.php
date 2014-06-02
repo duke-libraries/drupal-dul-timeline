@@ -1,6 +1,12 @@
 <?php
 $thumbCount = 0;
 $cbCount = 0;
+$isCorp = false;
+// test if it's a corporation
+if (strpos($_SERVER['REQUEST_URI'], '/corporations') !== false ){
+	$isCorp = true;
+}
+
 ?>
 
 <div class="timeline-wrapper">
@@ -39,7 +45,17 @@ $cbCount = 0;
 	<ul class="mainLinks">
 		<li><a href="#timeline-embed" onclick="_gaq.push(['_trackEvent', 'eacNav','timelineLink']);">Timeline</a></li>
 		<li><a href="#collections" onclick="_gaq.push(['_trackEvent', 'eacNav','collectionsLink']);">Collections</a></li>
-		<li><a href="#biography" onclick="_gaq.push(['_trackEvent', 'eacNav','biogHistLink']);">Biographical History</a></li>
+		
+		<?php
+		if ($isCorp == true) {
+			echo '<li><a href="#history" onclick="_gaq.push([\'_trackEvent\', \'eacNav\',\'biogHistLink\']);">Administrative History</a></li>';
+		}
+		else {
+			echo '<li><a href="#history" onclick="_gaq.push([\'_trackEvent\', \'eacNav\',\'biogHistLink\']);">Biographical History</a></li>';
+		}
+		?>
+
+		
  	</ul>
  	
  	<div class="clear"></div>
@@ -63,9 +79,15 @@ $cbCount = 0;
 	
 	<div class="grid-8 alpha">
 
-		<h2 id="biography" class="bioTitle">Biographical History</h2>
-
-		<?php
+		<?php 
+		
+		if ($isCorp == true) {
+			echo '<h2 id="history" class="bioTitle">Administrative History</h2>';
+		}
+		else {
+			echo '<h2 id="history" class="bioTitle">Biographical History</h2>';
+		}
+	
 
 		foreach ($data_timeline['feed']['entry'] as $item) {
 	
