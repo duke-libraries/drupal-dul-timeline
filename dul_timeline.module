@@ -203,20 +203,20 @@ function dul_timeline_timeline_page() {
 
 		//
 		$myRecord = $myResult->fetchObject();
-
-		$dulmaster_key = $myRecord->dulmaster_key;
-		$dulmaster_num = $myRecord->dulmaster_num;
-		$timeline_od = $myRecord->timeline_od;
-		$collections_od = $myRecord->collections_od;
-		$people_od = $myRecord->people_od;
-		$corporate_od = $myRecord->corporate_od;
-
+		
 		// redirect to 404
 		if($myRecord===FALSE) {
 	
 			drupal_goto('whoops');
 			return;
 		}
+		
+		$dulmaster_key = $myRecord->dulmaster_key;
+		$dulmaster_num = $myRecord->dulmaster_num;
+		$timeline_od = $myRecord->timeline_od;
+		$collections_od = $myRecord->collections_od;
+		$people_od = $myRecord->people_od;
+		$corporate_od = $myRecord->corporate_od;
 
 
 		// CONNECTIONS //
