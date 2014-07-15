@@ -1,6 +1,6 @@
 name = Collections Timeline
 description = Timeline Pages for Collections in Rubenstein
 package = Duke University Library UI
-version = 7.x-1.01
+version = 7.x-1.02
 core = 7.x
 configure = admin/config/timeline
