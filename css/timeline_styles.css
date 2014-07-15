@@ -320,6 +320,38 @@ box-shadow: 2px 2px 2px 0px #ccc; }
 #timeline-embed { background: white;}
 
 
+/* Timeline List Page Styles */
+
+.list-item {
+overflow: hidden;
+margin-bottom: 15px;
+}
+
+.list-item .thumbnail {
+width: 100px;
+float: left;
+margin-right: 15px;
+margin-bottom: 15px;
+display: block;
+padding: 4px;
+line-height: 20px;
+border: 1px solid #ddd;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+-webkit-transition: all 0.2s ease-in-out;
+-moz-transition: all 0.2s ease-in-out;
+-o-transition: all 0.2s ease-in-out;
+transition: all 0.2s ease-in-out;
+}
+
+.list-item .thumbnail img {
+width: 100%;
+}
+
 
 /* ------------------------- */
 /* Verite Timeline Overrides */
