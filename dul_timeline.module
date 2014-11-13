@@ -52,7 +52,7 @@ function dul_timeline_menu() {
 		
 	);
 	
-	$items['collections/creators'] = array(
+	$items['collections'] = array(
 			'page callback' => 'dul_timeline_timeline_page',
 			'access callback' => TRUE,
 			'type' => MENU_CALLBACK,
@@ -133,7 +133,7 @@ function dul_timeline_timeline_load($tid) {
 function dul_timeline_timeline_page() {
 	
 	// set the root path
-	$root_path = 'collections';
+	$root_path = 'collections/creators';
 	
 	// get the URL arguments
 	$myArgs = func_get_args();
@@ -146,7 +146,7 @@ function dul_timeline_timeline_page() {
 	
 	// +++ //
 	// for CPF holder pages (single argument)
-	if (func_num_args() == 1) {
+	if (func_num_args() == 2) {
 	
 		$url_type = $myArgs[1];
 		
