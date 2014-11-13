@@ -52,7 +52,7 @@ function dul_timeline_menu() {
 		
 	);
 	
-	$items['collections'] = array(
+	$items['collections/creators'] = array(
 			'page callback' => 'dul_timeline_timeline_page',
 			'access callback' => TRUE,
 			'type' => MENU_CALLBACK,
@@ -139,7 +139,7 @@ function dul_timeline_timeline_page() {
 	$myArgs = func_get_args();
 	
 	// if more than two arguments, 404
-	if (func_num_args() > 2) {
+	if (func_num_args() > 3) {
 		drupal_goto('whoops');
 		return;
 	}
@@ -148,7 +148,7 @@ function dul_timeline_timeline_page() {
 	// for CPF holder pages (single argument)
 	if (func_num_args() == 1) {
 	
-		$url_type = $myArgs[0];
+		$url_type = $myArgs[1];
 		
 		if ($url_type == "people") {
 		
@@ -189,11 +189,11 @@ function dul_timeline_timeline_page() {
 	
 	// +++ //
 	// for Timeline pages (two arguments)
-	if (func_num_args() == 2) {
+	if (func_num_args() == 3) {
 	
-		$url_type = $myArgs[0];
+		$url_type = $myArgs[1];
 		
-		$url_slug = $myArgs[1];
+		$url_slug = $myArgs[2];
 		
 
 		$page = array();
@@ -203,20 +203,20 @@ function dul_timeline_timeline_page() {
 
 		//
 		$myRecord = $myResult->fetchObject();
-
-		$dulmaster_key = $myRecord->dulmaster_key;
-		$dulmaster_num = $myRecord->dulmaster_num;
-		$timeline_od = $myRecord->timeline_od;
-		$collections_od = $myRecord->collections_od;
-		$people_od = $myRecord->people_od;
-		$corporate_od = $myRecord->corporate_od;
-
+		
 		// redirect to 404
 		if($myRecord===FALSE) {
 	
 			drupal_goto('whoops');
 			return;
 		}
+		
+		$dulmaster_key = $myRecord->dulmaster_key;
+		$dulmaster_num = $myRecord->dulmaster_num;
+		$timeline_od = $myRecord->timeline_od;
+		$collections_od = $myRecord->collections_od;
+		$people_od = $myRecord->people_od;
+		$corporate_od = $myRecord->corporate_od;
 
 
 		// CONNECTIONS //
