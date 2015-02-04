@@ -8,6 +8,7 @@ function dul_timeline_admin_overview() {
 	// Table Output
 	$header = array(
 		t('ID'),
+		t('Active?'),
 		t('Timeline Name'),
 		t('Actions'),
 	);
@@ -15,6 +16,7 @@ function dul_timeline_admin_overview() {
 	foreach ($dbResult as $o) {		// $o is my fancy notation for 'object'
 		$rows[] = array(
 			$o->tid,
+			$o->timeline_active,
 			$o->timeline_name,		// or whatever name used to represent the timeline name column
 			l(t('edit'), 'admin/config/timeline/edit/' . $o->tid),
 			);
@@ -39,6 +41,7 @@ function dul_timeline_timeline_admin_form($form, &$form_state, $timeline) {
 if ($timeline == "new") {
 
 	$timeline = new stdClass;
+	$timeline->timeline_active = 1;
 	$timeline->timeline_name = "";
 	$timeline->dulmaster_key = "0Ah7VCreXiBHudFpxMGY0M0FQY1daTFVKbXNSV2ItTlE";
 	$timeline->dulmaster_num = "";
@@ -51,6 +54,14 @@ if ($timeline == "new") {
 
 }
 
+	$form['timeline_active'] = array(
+		'#type' => 'checkbox',
+		'#description' => t('Is this timeline active?'),
+		'#title' => t('Active'),
+		'#default_value' => $timeline->timeline_active,
+		'#required' => FALSE,
+		);
+	
 	$form['timeline_name'] = array(
 		'#type' => 'textfield',
 		'#description' => t('The name of this collections timeline'),
@@ -184,6 +195,7 @@ function dul_timeline_timeline_admin_form_submit($form, &$form_state) {
       ))
       
       ->fields(array(
+      	'timeline_active' => $form_state['values']['timeline_active'],
       	'timeline_name' => $form_state['values']['timeline_name'],
       	'dulmaster_key' => $form_state['values']['dulmaster_key'],
       	'dulmaster_num' => $form_state['values']['dulmaster_num'],
