@@ -199,7 +199,7 @@ function dul_timeline_timeline_page() {
 		$page = array();
 
 		// 
-		$myResult = db_query('SELECT * FROM {timeline} WHERE url_type = :url_type AND url_slug = :url_slug', array(':url_type' => $url_type, ':url_slug' => $url_slug));
+		$myResult = db_query('SELECT * FROM {timeline} WHERE url_type = :url_type AND url_slug = :url_slug AND timeline_active = 1', array(':url_type' => $url_type, ':url_slug' => $url_slug));
 
 		//
 		$myRecord = $myResult->fetchObject();

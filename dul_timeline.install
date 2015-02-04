@@ -16,6 +16,13 @@ function dul_timeline_schema() {
 					'not null' => TRUE,
 					),
 				
+				'timeline_active' => array(
+					'type' => 'int',
+					'length' => 1,
+					'not null' => TRUE,
+					'default' => '',
+					),
+				
 				'timeline_name' => array(
 					'type' => 'varchar',
 					'length' => 128,
@@ -82,6 +89,26 @@ function dul_timeline_schema() {
 			),
 	);
 }
+
+/**
+ * adds new column for 'active'
+ */
+function dul_timeline_update_3() {
+  $field = array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 1,
+    'description' => 'is timeline active',
+  );
+  db_add_field('timeline', 'timeline_active', $field);
+  db_update('timeline')
+    ->fields(array('timeline_active' => 1))
+    ->execute();
+}
+
+
+
 
 /**
  * Implements hook_install()
