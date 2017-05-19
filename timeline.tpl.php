@@ -66,9 +66,12 @@ if (strpos($_SERVER['REQUEST_URI'], '/corporations') !== false ){
 
 <!--- Timeline Embed --->
 
+
 	<div class="iframe-timeline" id="timeline-embed">
 
-		<?php echo '<iframe src="//embed.verite.co/timeline/?source=' . $timeline_key . '&amp;font=Georgia-Helvetica&amp;maptype=toner&amp;lang=en&amp;height=450" width="100%" height="450" frameborder="0"></iframe>'; ?>
+		<?php // echo '<iframe src="//embed.verite.co/timeline/?source=' . $timeline_key . '&amp;font=Georgia-Helvetica&amp;maptype=toner&amp;lang=en&amp;height=450" width="100%" height="450" frameborder="0"></iframe>'; ?>
+
+		<?php echo '<iframe src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=' . $timeline_key . '&amp;font=Georgia-Helvetica&amp;maptype=toner&amp;lang=en&amp;height=450" width="100%" height="450" frameborder="0"></iframe>'; ?>
 
 	</div>
 
