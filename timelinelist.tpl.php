@@ -27,7 +27,7 @@ $ctx = stream_context_create(array(
 		$dulmaster_key = $record->dulmaster_key;
 
 		// Pull in Master Google Spreadsheet as JSON
-		$url_dulmaster = "//spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
+		$url_dulmaster = "https://spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
 		$json_dulmaster = file_get_contents($url_dulmaster, 0, $ctx);
 		$data_dulmaster = json_decode($json_dulmaster, TRUE);
 

@@ -233,7 +233,7 @@ function dul_timeline_timeline_page() {
 
 
 		// Pull in Master Google Spreadsheet as JSON
-		$url_dulmaster = "//spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
+		$url_dulmaster = "https://spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
 		$json_dulmaster = file_get_contents($url_dulmaster, 0, $ctx);
 		$data_dulmaster = json_decode($json_dulmaster, TRUE);
 
@@ -251,19 +251,19 @@ function dul_timeline_timeline_page() {
 
 		$timeline_key = $dulmaster_sheetkey;
 
-		$url_timeline = "//spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $timeline_od . "/public/values?alt=json&amp;callback=displayContent";
+		$url_timeline = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $timeline_od . "/public/values?alt=json&amp;callback=displayContent";
 		$json_timeline = file_get_contents($url_timeline, 0, $ctx);
 		$data_timeline = json_decode($json_timeline, TRUE);
 
-		$url_associatedcollections = "//spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $collections_od . "/public/values?alt=json&amp;callback=displayContent";
+		$url_associatedcollections = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $collections_od . "/public/values?alt=json&amp;callback=displayContent";
 		$json_associatedcollections = file_get_contents($url_associatedcollections, 0, $ctx);
 		$data_associatedcollections = json_decode($json_associatedcollections, TRUE);
 
-		$url_people = "//spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $people_od . "/public/values?alt=json&amp;callback=displayContent";
+		$url_people = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $people_od . "/public/values?alt=json&amp;callback=displayContent";
 		$json_people = file_get_contents($url_people, 0, $ctx);
 		$data_people = json_decode($json_people, TRUE);
 
-		$url_corporatebodies = "//spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $corporate_od . "/public/values?alt=json&amp;callback=displayContent";
+		$url_corporatebodies = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $corporate_od . "/public/values?alt=json&amp;callback=displayContent";
 		$json_corporatebodies = file_get_contents($url_corporatebodies, 0, $ctx);
 		$data_corporatebodies = json_decode($json_corporatebodies, TRUE);
 
