@@ -16,16 +16,16 @@ function dul_timeline_menu() {
 
 			'file' => 'dul_timeline.admin.inc',
 		),
-		
+
 		'admin/config/timeline/new' => array (
-		
+
 			'type' => MENU_LOCAL_ACTION,
-			'title' => "New Timeline", 
-			'access arguments' => array('administer site configuration'), 
+			'title' => "New Timeline",
+			'access arguments' => array('administer site configuration'),
 			'page callback' => 'drupal_get_form',
 			'page arguments' => array('dul_timeline_timeline_admin_form', "new"),
 			'file' => 'dul_timeline.admin.inc',
-		
+
 		),
 
 		'admin/config/timeline/settings' => array(
@@ -37,11 +37,11 @@ function dul_timeline_menu() {
 			'type' => MENU_DEFAULT_LOCAL_TASK,
 		),
 
-		
+
 		'admin/config/timeline/edit/%dul_timeline' => array(
 			'page callback' => 'drupal_get_form',
 
-			# the "loader" function noted above will return an 
+			# the "loader" function noted above will return an
 			# array, object, string (your choice).
 			'page arguments' => array('dul_timeline_timeline_admin_form', 4),
 
@@ -49,17 +49,17 @@ function dul_timeline_menu() {
 			'access arguments' => array('administer site configuration'),
 			'title' => 'Edit Timeline Entry',
 		),
-		
+
 	);
-	
+
 	$items['collections'] = array(
 			'page callback' => 'dul_timeline_timeline_page',
 			'access callback' => TRUE,
 			'type' => MENU_CALLBACK,
 			);
-	
-	
-	
+
+
+
 	return $items;
 
 
@@ -71,7 +71,7 @@ function dul_timeline_load($tid) {
 	$result = db_query('SELECT n.* FROM {timeline} n WHERE n.tid = :tid', array(':tid' => $tid));
 	// select from timeline -> record based on ID
 
-	$record = $result->fetchObject(); 
+	$record = $result->fetchObject();
 
 	return $record;
 
@@ -81,16 +81,16 @@ function dul_timeline_load($tid) {
 /**
  * Implements hook_theme
  */
- 
+
 function dul_timeline_theme() {
-	
+
 	return array(
-	
+
 		'the_timeline' => array(
 			'template' => 'timeline',
 			'variables' => array(
-				'dulmaster_headshot' => NULL, 
-				'dulmaster_name' => NULL, 
+				'dulmaster_headshot' => NULL,
+				'dulmaster_name' => NULL,
 				'dulmaster_abstract' => NULL,
 				'timeline_key' => NULL,
 				'data_timeline' => NULL,
@@ -99,22 +99,22 @@ function dul_timeline_theme() {
 				'data_corporatebodies' => NULL,
 				),
 			),
-			
+
 		'the_timeline_list' => array(
 			'template' => 'timelinelist',
 			'variables' => array(
-				'url_type' => NULL, 
-				'root_path' => NULL, 
+				'url_type' => NULL,
+				'root_path' => NULL,
 				),
 			),
-			
+
 		);
-	
+
 }
 
 
 function dul_timeline_timeline_load($tid) {
-	
+
 	if (preg_match('/^new/i', 1)) {
 		// create new object (or array)
 	} else {
@@ -131,86 +131,86 @@ function dul_timeline_timeline_load($tid) {
 //function dul_timeline_timeline_page($url_type, $url_slug) {
 
 function dul_timeline_timeline_page() {
-	
+
 	// set the root path
 	$root_path = 'collections/creators';
-	
+
 	// get the URL arguments
 	$myArgs = func_get_args();
-	
+
 	// if more than two arguments, 404
 	if (func_num_args() > 3) {
 		drupal_goto('whoops');
 		return;
 	}
-	
+
 	// +++ //
 	// for CPF holder pages (single argument)
 	if (func_num_args() == 2) {
-	
+
 		$url_type = $myArgs[1];
-		
+
 		if ($url_type == "people") {
-		
+
 			$timeline_title_type = "Person";
-			
+
 		} else if ($url_type == "corporations") {
-		
+
 			$timeline_title_type = "Corporation";
-		
+
 		} else if ($url_type == "families") {
-		
+
 			$timeline_title_type = "Family";
-		
+
 		} else {
 			drupal_goto('whoops');
 			return;
 		}
-		
-		
+
+
 		drupal_set_title('List of ' . $timeline_title_type . ' Timelines');
 		drupal_add_css(drupal_get_path('module', 'dul_timeline') . '/css/timeline_styles.css' , array('preprocess' => FALSE));
-		
+
 		$page = array();
-		
+
 		$page['timeline_list'] = array (
 			'#theme' => 'the_timeline_list',
 			'#url_type' => $url_type,
 			'#root_path' => $root_path,
-			);	
-			
+			);
+
 		//echo $url_type;
 
 
 		return $page;
 
-	
+
 	}
-	
+
 	// +++ //
 	// for Timeline pages (two arguments)
 	if (func_num_args() == 3) {
-	
+
 		$url_type = $myArgs[1];
-		
+
 		$url_slug = $myArgs[2];
-		
+
 
 		$page = array();
 
-		// 
+		//
 		$myResult = db_query('SELECT * FROM {timeline} WHERE url_type = :url_type AND url_slug = :url_slug AND timeline_active = 1', array(':url_type' => $url_type, ':url_slug' => $url_slug));
 
 		//
 		$myRecord = $myResult->fetchObject();
-		
+
 		// redirect to 404
 		if($myRecord===FALSE) {
-	
+
 			drupal_goto('whoops');
 			return;
 		}
-		
+
 		$dulmaster_key = $myRecord->dulmaster_key;
 		$dulmaster_num = $myRecord->dulmaster_num;
 		$timeline_od = $myRecord->timeline_od;
@@ -222,18 +222,18 @@ function dul_timeline_timeline_page() {
 		// CONNECTIONS //
 
 		// set timeout length
-		$ctx = stream_context_create(array( 
-			'http' => array( 
-				'timeout' => 5 
-				) 
-			) 
-		); 
+		$ctx = stream_context_create(array(
+			'http' => array(
+				'timeout' => 5
+				)
+			)
+		);
 
 		// set timeout fallback
 
 
 		// Pull in Master Google Spreadsheet as JSON
-		$url_dulmaster = "http://spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
+		$url_dulmaster = "https://spreadsheets.google.com/feeds/list/" . $dulmaster_key . "/od6/public/values?alt=json&amp;callback=displayContent";
 		$json_dulmaster = file_get_contents($url_dulmaster, 0, $ctx);
 		$data_dulmaster = json_decode($json_dulmaster, TRUE);
 
@@ -251,7 +251,7 @@ function dul_timeline_timeline_page() {
 
 		$timeline_key = $dulmaster_sheetkey;
 
-		$url_timeline = "http://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $timeline_od . "/public/values?alt=json&amp;callback=displayContent";
+		$url_timeline = "https://spreadsheets.google.com/feeds/list/" . $timeline_key . "/" . $timeline_od . "/public/values?alt=json&amp;callback=displayContent";
 		$json_timeline = file_get_contents($url_timeline, 0, $ctx);
 		$data_timeline = json_decode($json_timeline, TRUE);
 
@@ -268,11 +268,11 @@ function dul_timeline_timeline_page() {
 		$data_corporatebodies = json_decode($json_corporatebodies, TRUE);
 
 
-		drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', 'external');
-		drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js', 'external');
-		drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css', array('type' => 'external'));
-		drupal_add_js('http://library.duke.edu/digitalcollections/media/app/js/colorbox-1.3.19/jquery.colorbox-min.js', 'external');
-		drupal_add_css('http://library.duke.edu/digitalcollections/media/app/js/colorbox-1.3.19/colorbox.css', array('type' => 'external'));
+		drupal_add_js('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', 'external');
+		drupal_add_js('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js', 'external');
+		drupal_add_css('//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css', array('type' => 'external'));
+		drupal_add_js('//library.duke.edu/digitalcollections/media/app/js/colorbox-1.3.19/jquery.colorbox-min.js', 'external');
+		drupal_add_css('//library.duke.edu/digitalcollections/media/app/js/colorbox-1.3.19/colorbox.css', array('type' => 'external'));
 		drupal_add_css(drupal_get_path('module', 'dul_timeline') . '/css/timeline_styles.css' , array('preprocess' => FALSE));
 		drupal_add_js(drupal_get_path('module', 'dul_timeline') . '/js/settings.js', array('preprocess' => FALSE));
 
@@ -294,8 +294,5 @@ function dul_timeline_timeline_page() {
 		return $page;
 
 	}
-	
+
 }
-
-
-
