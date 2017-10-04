@@ -110,10 +110,11 @@ h2.bioTitle {
 	font-size: 16px;
 	font-style: bold;
 	width: 31%;
+	padding-left: 10px;
 }
 
 .headline {
-	font-size: 13px;
+	font-size: 1.2em;
 	font-style: bold;
 	margin-left: 35%;
 }
@@ -143,14 +144,14 @@ h2.bioTitle {
 .clipwrapper {
 	width: 5.5%;
 	min-height: 35px;
-	
+
 	float: left;
 	overflow: hidden;
 	position: relative;
-	
+
 	border: 1px solid #ccc;
 	padding: 3px;
-	
+
 	-moz-box-shadow: 2px 2px 2px 0px #ccc;
 	-webkit-box-shadow: 2px 2px 2px 0px #ccc;
 	box-shadow: 2px 2px 2px 0px #ccc;
@@ -166,21 +167,21 @@ h2.bioTitle {
 }
 
 .small-thumbnail img {
-	
+
 }
 
 .description {
 	/*float: left;*/
 	margin-left: 35%;
-	
+
 }
 
 .description p {
-	font-size: 12px;
+	font-size: 1em;
 	line-height: 1.4em;
 	margin:0;
 	padding:0;
-	
+
 }
 
 .credit {
@@ -246,14 +247,14 @@ div.abstractBio {
 
 a.linkFindingAid { padding-right: 20px !important;}
 
-#personPortrait { 
-float: right; 
+#personPortrait {
+float: right;
 margin-left: 20px;
 max-width: 20%;
 }
 
-img.portrait { 
-width: 100%; 
+img.portrait {
+width: 100%;
 }
 
 p.personAbout {     color: #333333;
@@ -313,7 +314,7 @@ span.collectionDescription { display: block; margin-top: 10px; color: #777;}
 .highlighted { background-color: #ffffaa !important; }
 
 .subtleBorder { border: 1px solid #ccc; padding: 3px; }
-.smallShadow { 
+.smallShadow {
 -moz-box-shadow: 2px 2px 2px 0px #ccc; -webkit-box-shadow: 2px 2px 2px 0px #ccc;
 box-shadow: 2px 2px 2px 0px #ccc; }
 
@@ -392,4 +393,3 @@ a.timelineMoreLink:hover { cursor: pointer;}
    width: 100%;
 }
 #cboxCurrent { left: 130px; }
-
