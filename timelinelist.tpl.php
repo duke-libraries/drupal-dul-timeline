@@ -32,7 +32,7 @@ $ctx = stream_context_create(array(
 		$data_dulmaster = json_decode($json_dulmaster, TRUE);
 
 		$dulmaster_name = $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$entityname']['$t'];
-		$dulmaster_headshot = 'http://library.duke.edu/digitalcollections/media/jpg/' . $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$slug']['$t'] . '/med/' . $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$portraitimage']['$t'];
+		$dulmaster_headshot = 'https://library.duke.edu/digitalcollections/media/jpg/' . $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$slug']['$t'] . '/med/' . $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$portraitimage']['$t'];
 		$dulmaster_abstract = $data_dulmaster['feed']['entry'][$dulmaster_num]['gsx$abstract']['$t'];
 
 		$timeline_url = $GLOBALS['base_path'] . $root_path .'/' . $url_type . '/' . $url_slug;
