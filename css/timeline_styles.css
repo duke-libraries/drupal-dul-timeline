@@ -238,7 +238,7 @@ font-size: 12px;
 div.abstractBio {
 
 
-   background: url("http://library.duke.edu/imgs/common/effects/gradient_tan_150.jpg") repeat-x scroll left top #e8e6e0;
+   background: url("../images/gradient_tan_150.jpg") repeat-x scroll left top #e8e6e0;
    border-bottom: 1px dotted #C5C1AF;
    border-top: 1px dotted #C5C1AF;
    padding: 10px 20px;
@@ -275,8 +275,8 @@ position: relative;
 div.bioSource {  font-style: italic; font-size: 11px;}
 
 ul.mainLinks li { float: left; margin-left: 0; margin-right: 4%; list-style: none; font-weight: bold; }
-ul.mainLinks a { padding-left: 20px; background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_grey.png") no-repeat top left;}
-ul.mainLinks a:hover { background: url("http://library.duke.edu/digitalcollections/media/app/images/icons/shape_square_darkblue.png") no-repeat top left; color: #0736A4;}
+ul.mainLinks a { padding-left: 20px; background: url("../images/shape_square_grey.png") no-repeat top left;}
+ul.mainLinks a:hover { background: url("../images/icons/shape_square_darkblue.png") no-repeat top left; color: #0736A4;}
 
 
 table.biogHist { vertical-align: top; text-align: left;}
